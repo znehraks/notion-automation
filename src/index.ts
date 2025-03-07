@@ -11,4 +11,5 @@ async function main() {
   await makeMonthlyTasks()
 }
 
+// TODO AWS lambda에서 특정 시간에 실행되도록 설정
 main()
