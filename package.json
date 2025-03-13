@@ -6,7 +6,10 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "build": "tsup",
+    "package": "zip -r lambda.zip dist/* node_modules/@notionhq node_modules/dayjs node_modules/dotenv",
+    "deploy": "npm run build && npm run package && aws lambda update-function-code --function-name YOUR_FUNCTION_NAME --zip-file fileb://lambda.zip"
   },
   "author": "znehraks",
   "license": "ISC",
