@@ -5,11 +5,25 @@ import dayjs from 'dayjs'
 import { makeDailyTasks, makeMonthlyTasks, makeWeeklyTasks } from './makePeriodTasks'
 dayjs.locale('ko')
 
-async function main() {
-  await makeDailyTasks()
-  await makeWeeklyTasks()
-  await makeMonthlyTasks()
-}
+// Lambda 핸들러 함수 - AWS Lambda에서 실행되는 진입점
+export const handler = async (event: any) => {
+  try {
+    console.log('이벤트 시작:', event)
 
-// TODO AWS lambda에서 특정 시간에 실행되도록 설정
-main()
+    // 모든 작업 실행
+    await makeDailyTasks()
+    await makeWeeklyTasks()
+    await makeMonthlyTasks()
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: '작업 완료됨' }),
+    }
+  } catch (error) {
+    console.error('오류 발생:', error)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: '오류 발생', error: String(error) }),
+    }
+  }
+}
