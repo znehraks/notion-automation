@@ -8,8 +8,8 @@ export default defineConfig({
   clean: true,
   minify: true,
   sourcemap: false,
-  // 외부 모듈 설정 (이 모듈들은 번들에 포함되지 않음)
-  external: ['@notionhq/client'],
-  // Node.js 런타임 환경에 존재하는 모듈들
-  noExternal: ['dayjs'],
+  // 모든 의존성을 번들에 포함
+  noExternal: [],
+  // 또는 필요한 것만 번들에 포함
+  // noExternal: ['@notionhq/client', 'dayjs', 'dotenv', 'node-fetch'],
 })
