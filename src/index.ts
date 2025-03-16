@@ -1,8 +1,10 @@
 import dotenv from 'dotenv'
-dotenv.config() // 여기서 한 번만 호출
+dotenv.config()
+
 import 'dayjs/locale/ko' // 한국어 로케일 추가
 import dayjs from 'dayjs'
 import { makeDailyTasks, makeMonthlyTasks, makeWeeklyTasks } from './makePeriodTasks'
+
 dayjs.locale('ko')
 
 // Lambda 핸들러 함수 - AWS Lambda에서 실행되는 진입점

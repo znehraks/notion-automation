@@ -8,8 +8,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "build": "tsup",
-    "package": "cd dist && zip -r ../lambda.zip ./*",
-    "deploy": "npm run build && npm run package && aws lambda update-function-code --function-name YOUR_FUNCTION_NAME --zip-file fileb://lambda.zip"
+    "package": "cd dist && zip -r ../lambda.zip ./*"
   },
   "author": "znehraks",
   "license": "ISC",
@@ -17,13 +16,15 @@
   "dependencies": {
     "@notionhq/client": "^2.2.16",
     "dayjs": "^1.11.13",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsup": "^8.4.0",
     "typescript": "^5.8.2",
     "vitest": "^3.0.8"
   }

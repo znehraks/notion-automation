@@ -8,8 +8,18 @@ export default defineConfig({
   clean: true,
   minify: true,
   sourcemap: false,
-  // 모든 의존성을 번들에 포함
-  noExternal: [],
-  // 또는 필요한 것만 번들에 포함
-  // noExternal: ['@notionhq/client', 'dayjs', 'dotenv', 'node-fetch'],
+  bundle: true,
+  dts: false,
+  platform: 'node',
+  noExternal: [
+    '@notionhq/client',
+    'dayjs',
+    'dayjs/locale/ko',
+    'dayjs/plugin/weekOfYear',
+    'dayjs/plugin/isoWeek',
+    'dayjs/plugin/isSameOrBefore',
+    'dayjs/plugin/isSameOrAfter',
+    'node-fetch',
+    'dotenv',
+  ],
 })
