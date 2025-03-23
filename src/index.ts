@@ -17,7 +17,7 @@ export const handler = async (event: any) => {
     await makeWeeklyTasks()
     await makeMonthlyTasks()
 
-    console.log("Date test:", new Date().toString());
+    console.log('Date test:', new Date().toString())
     return {
       statusCode: 200,
       body: JSON.stringify({ message: '작업 완료됨' }),

@@ -33,6 +33,11 @@ const periodConfigs: Record<PeriodType, PeriodConfig> = {
       return { start: today, end: today }
     },
     formatTitle: (start) => start.format('YYYY.MM.DD (ddd)'),
+    shouldExcludeTask: (taskRowResult) => {
+      // 진행도가 완료 또는 중단인 항목 제외
+      const progress = taskRowResult.properties['진행도']?.select?.name
+      return progress === '완료' || progress === '중단'
+    },
   },
   weekly: {
     dbName: 'Weekly Tasks',
@@ -55,6 +60,11 @@ const periodConfigs: Record<PeriodType, PeriodConfig> = {
     },
     formatTitle: (start, end) =>
       `${start.format('YYYY.MM.DD')}(${start.format('ddd')}) - ${end.format('YYYY.MM.DD')}(${end.format('ddd')})`,
+    shouldExcludeTask: (taskRowResult) => {
+      // 진행도가 완료 또는 중단인 항목 제외
+      const progress = taskRowResult.properties['진행도']?.select?.name
+      return progress === '완료' || progress === '중단'
+    },
   },
   monthly: {
     dbName: 'Monthly Tasks',
@@ -67,6 +77,12 @@ const periodConfigs: Record<PeriodType, PeriodConfig> = {
     },
     formatTitle: (start) => start.format('YYYY.MM'),
     shouldExcludeTask: (taskRowResult) => {
+      // 진행도가 완료 또는 중단인 항목 제외
+      const progress = taskRowResult.properties['진행도']?.select?.name
+      if (progress === '완료' || progress === '중단') {
+        return true
+      }
+
       // Daily 관련 항목 제외
       const taskType = taskRowResult.properties['Task Type']
       const taskName = taskRowResult.properties['Name']?.title?.[0]?.plain_text || ''
