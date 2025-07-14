@@ -102,11 +102,16 @@ export async function makePeriodTasks(periodType: PeriodType) {
   const config = periodConfigs[periodType]
   const { start, end } = config.getDateRange()
 
-  const taskDB = (
-    await notion.search({
+  const taskDB = await notion
+    .search({
       query: `TasksDB-${dayjs().format('YYYY')}`,
+      page_size: 1000,
+      filter: {
+        property: 'object',
+        value: 'database',
+      },
     })
-  ).results.find((result) => result.object === 'database')
+    .then(({ results }) => results[0])
 
   if (!taskDB?.id) {
     console.log('TasksDB를 찾을 수 없습니다.')
